@@ -1,0 +1,278 @@
+/* Focus mode styles */
+.focus-mode .toolbar,
+.focus-mode .tabs-container,
+.focus-mode .status-bar {
+  display: none !important;
+}
+
+.focus-mode .main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  background: var(--bg-color);
+  padding-top: 150px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.focus-mode .content-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.focus-mode .editor-container {
+  border: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.focus-mode .editor {
+  flex: 1;
+  width: 100%;
+  min-height: 200px;
+  padding: 2rem;
+  line-height: 1.8;
+  background: var(--bg-color);
+  border: none;
+  font-size: 18px !important;
+  letter-spacing: -0.011em;
+  position: relative;
+  z-index: 1;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.focus-mode .line-numbers {
+  display: none;
+}
+
+.focus-mode .editor {
+  padding: 0 32px;
+}
+
+/* Transition effects */
+.toolbar,
+.tabs-container,
+.status-bar,
+.content-container {
+  transition: all 0.3s ease;
+}
+
+/* Focus mode button styles */
+.focus-mode-only {
+  display: none;
+}
+
+.focus-mode .focus-mode-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: var(--tab-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 4px;
+}
+
+/* Focus controls container */
+.focus-controls {
+  position: fixed;
+  top: env(safe-area-inset-top, 20px);
+  right: env(safe-area-inset-right, 20px);
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--toolbar-bg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.focus-mode .focus-controls {
+  opacity: 1;
+}
+
+/* Ensure buttons are properly spaced and styled */
+.focus-controls button {
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border-radius: 6px;
+  background: var(--tab-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.focus-controls button:hover {
+  background: var(--hover-bg);
+}
+
+.focus-controls button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* PWA specific adjustments */
+@media all and (display-mode: standalone) {
+  .focus-controls {
+    top: max(env(safe-area-inset-top, 20px), 40px);
+  }
+}
+
+/* Copy button styles - normal mode */
+.copy-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: var(--tab-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+  background-color: var(--tab-active-bg);
+  transform: translateY(-1px);
+}
+
+.copy-button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Copy button styles - focus mode */
+.focus-mode .copy-button {
+  position: fixed;
+  top: 20px;
+  right: 70px;
+  background: var(--toolbar-bg);
+  border: 1px solid var(--border-color);
+  opacity: 0.7;
+  z-index: 1000;
+}
+
+.focus-mode .copy-button:hover {
+  opacity: 1;
+  background-color: var(--tab-active-bg);
+}
+
+/* Exit button styles */
+.focus-mode-exit {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 8px;
+  background-color: var(--toolbar-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  border-radius: 4px;
+  display: none !important; /* Force hide by default */
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+  width: 40px;
+  height: 40px;
+}
+
+/* Mobile styles for focus mode buttons */
+@media (max-width: 768px) {
+  .focus-mode .main-container {
+    padding: 1rem;
+    padding-top: 20px;
+  }
+
+  .focus-mode .editor {
+    padding: 1rem;
+    font-size: 16px !important;
+    min-height: 150px;
+  }
+
+  .focus-mode .copy-button,
+  .focus-mode-exit {
+    width: 44px;
+    height: 44px;
+    top: 20px;
+    opacity: 0.9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .focus-mode .copy-button {
+    right: 74px;
+  }
+
+  .focus-mode-exit {
+    right: 20px;
+  }
+
+  .focus-mode .copy-button:hover,
+  .focus-mode-exit:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+body.focus-mode .focus-mode-exit {
+  display: flex !important; /* Only show in focus mode */
+}
+
+.focus-mode-exit:hover {
+  opacity: 1;
+  background-color: var(--tab-active-bg);
+  transform: translateY(-1px);
+}
+
+.focus-mode-exit svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Animation for copy feedback */
+@keyframes copyFeedback {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.copy-feedback {
+  animation: copyFeedback 0.3s ease;
+}
+
+body.focus-mode .toolbar,
+body.focus-mode .tabs-container,
+body.focus-mode .status-bar {
+  display: none !important;
+}
